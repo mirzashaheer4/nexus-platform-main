@@ -122,13 +122,13 @@ router.put(
   '/me',
   verifyToken,
   validate([
-    body('bio').optional().isString().trim().escape(),
-    body('location').optional().isString().trim().escape(),
-    body('website').optional().isString().trim(),
-    body('startupName').optional().isString().trim().escape(),
-    body('startupStage').optional().isString().trim().escape(),
-    body('fundingRequired').optional().isInt({ min: 0 }),
-    body('teamSize').optional().isInt({ min: 0 })
+    body('bio').optional({ checkFalsy: true }).isString().trim().escape(),
+    body('location').optional({ checkFalsy: true }).isString().trim().escape(),
+    body('website').optional({ checkFalsy: true }).isString().trim(),
+    body('startupName').optional({ checkFalsy: true }).isString().trim().escape(),
+    body('startupStage').optional({ checkFalsy: true }).isString().trim().escape(),
+    body('fundingRequired').optional({ checkFalsy: true }).isInt({ min: 0 }),
+    body('teamSize').optional({ checkFalsy: true }).isInt({ min: 0 })
   ]),
   async (req, res) => {
     const {
