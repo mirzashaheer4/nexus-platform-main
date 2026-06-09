@@ -9,7 +9,23 @@ export default function Profile() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
+  const [toggling2FA, setToggling2FA] = useState(false);
   const fileInputRef = useRef();
+
+  const handleToggle2FA = async () => {
+    setToggling2FA(true);
+    setError('');
+    try {
+      const endpoint = profile.twoFactorEnabled ? '/auth/disable-2fa' : '/auth/enable-2fa';
+      const res = await API.post(endpoint);
+      setProfile(prev => ({ ...prev, twoFactorEnabled: res.data.twoFactorEnabled }));
+      setForm(prev => ({ ...prev, twoFactorEnabled: res.data.twoFactorEnabled }));
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to update 2FA status.');
+    } finally {
+      setToggling2FA(false);
+    }
+  };
 
   useEffect(() => {
     API.get('/profile/me')
@@ -202,8 +218,44 @@ export default function Profile() {
           <button id="edit-profile-btn" onClick={() => setEditing(true)} className="mt-4 bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
             Edit Profile
           </button>
-        </div>
       )}
+
+      {/* 2FA Security Section */}
+      <hr className="my-6 border-gray-200 dark:border-slate-800" />
+      
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-3 text-slate-900 dark:text-white">Security Settings</h3>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-xl gap-4">
+          <div>
+            <p className="font-semibold text-sm text-slate-900 dark:text-white">Two-Factor Authentication (2FA)</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Secure your account by requiring an email verification code (OTP) at login.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 self-end sm:self-auto">
+            <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${
+              profile.twoFactorEnabled 
+                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50' 
+                : 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-400 border border-slate-200 dark:border-slate-700'
+            }`}>
+              {profile.twoFactorEnabled ? 'Enabled' : 'Disabled'}
+            </span>
+            <button
+              id="toggle-2fa-btn"
+              type="button"
+              onClick={handleToggle2FA}
+              disabled={toggling2FA}
+              className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition ${
+                profile.twoFactorEnabled
+                  ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-sm'
+                  : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm'
+              }`}
+            >
+              {toggling2FA ? 'Processing...' : profile.twoFactorEnabled ? 'Disable' : 'Enable'}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

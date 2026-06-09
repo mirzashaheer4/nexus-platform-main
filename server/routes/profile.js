@@ -67,7 +67,7 @@ const getProfileWithUser = async (userId) => {
     User.findById(userId).select('-password'),
   ]);
   if (!profile || !user) return null;
-  return { ...profile.toObject(), name: user.name, email: user.email, role: user.role };
+  return { ...profile.toObject(), name: user.name, email: user.email, role: user.role, twoFactorEnabled: user.twoFactorEnabled };
 };
 
 // ─── Routes ───────────────────────────────────────────────────────────────────

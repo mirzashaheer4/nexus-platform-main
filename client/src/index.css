@@ -13,14 +13,70 @@ html.dark .bg-white {
   color: #f8fafc !important;
 }
 
-html.dark .bg-slate-50, html.dark .bg-gray-50 {
+html.dark .bg-slate-50, 
+html.dark .bg-gray-50,
+html.dark .bg-zinc-50,
+html.dark .bg-neutral-50,
+html.dark .bg-stone-50 {
   background-color: #020617 !important;
 }
 
+html.dark .bg-slate-100,
+html.dark .bg-gray-100,
+html.dark .bg-zinc-100,
+html.dark .bg-slate-200,
+html.dark .bg-gray-200 {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Hover effects */
+html.dark .hover\:bg-slate-50\/60:hover,
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-gray-100:hover {
+  background-color: #1e293b !important;
+}
+
+/* Alerts / Badges Backgrounds */
+html.dark .bg-indigo-50,
+html.dark .bg-indigo-100 {
+  background-color: rgba(79, 70, 229, 0.2) !important;
+}
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-100 {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+}
+html.dark .bg-rose-50,
+html.dark .bg-rose-100,
+html.dark .bg-red-50,
+html.dark .bg-red-100 {
+  background-color: rgba(244, 63, 94, 0.2) !important;
+}
+html.dark .bg-amber-50,
+html.dark .bg-amber-100,
+html.dark .bg-yellow-50,
+html.dark .bg-yellow-100 {
+  background-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Borders and Dividers */
 html.dark .border,
+html.dark .border-slate-100,
 html.dark .border-slate-200,
+html.dark .border-slate-300,
+html.dark .border-gray-100,
 html.dark .border-gray-200,
 html.dark .border-gray-300 {
+  border-color: #1e293b !important;
+}
+
+html.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-y > :not([hidden]) ~ :not([hidden]) {
   border-color: #1e293b !important;
 }
 
@@ -32,7 +88,9 @@ html.dark h4,
 html.dark p,
 html.dark span,
 html.dark strong,
-html.dark label {
+html.dark label,
+html.dark th,
+html.dark td {
   color: #f8fafc;
 }
 
@@ -51,13 +109,40 @@ html.dark .text-gray-700 {
 html.dark .text-slate-600,
 html.dark .text-gray-600,
 html.dark .text-slate-500,
-html.dark .text-gray-500 {
+html.dark .text-gray-500,
+html.dark .text-slate-400,
+html.dark .text-gray-400 {
   color: #94a3b8 !important;
 }
 
-/* Links */
-html.dark a.text-indigo-600,
+/* Colored Texts */
+html.dark .text-indigo-900,
+html.dark .text-indigo-800,
+html.dark .text-indigo-700,
 html.dark .text-indigo-600 {
+  color: #818cf8 !important;
+}
+html.dark .text-emerald-900,
+html.dark .text-emerald-800,
+html.dark .text-emerald-700 {
+  color: #34d399 !important;
+}
+html.dark .text-rose-900,
+html.dark .text-rose-800,
+html.dark .text-rose-700,
+html.dark .text-red-900,
+html.dark .text-red-800,
+html.dark .text-red-700 {
+  color: #f87171 !important;
+}
+html.dark .text-amber-900,
+html.dark .text-amber-800,
+html.dark .text-amber-700 {
+  color: #fbbf24 !important;
+}
+
+/* Links */
+html.dark a.text-indigo-600 {
   color: #818cf8 !important;
 }
 
