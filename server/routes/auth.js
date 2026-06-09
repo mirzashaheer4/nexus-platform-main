@@ -72,10 +72,14 @@ const setAuthCookies = (res, user, accessToken, refreshToken) => {
 };
 
 const clearAuthCookies = (res) => {
-  res.clearCookie('accessToken');
-  res.clearCookie('refreshToken');
-  res.clearCookie('jwtPayload');
-  res.clearCookie('_st');
+  const commonOptions = {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+  };
+  res.clearCookie('accessToken', { ...commonOptions, httpOnly: true });
+  res.clearCookie('refreshToken', { ...commonOptions, httpOnly: true });
+  res.clearCookie('jwtPayload', { ...commonOptions, httpOnly: false });
+  res.clearCookie('_st', { ...commonOptions, httpOnly: false });
 };
 
 // ─── Swagger Documentation & Handlers ──────────────────────────────────────────

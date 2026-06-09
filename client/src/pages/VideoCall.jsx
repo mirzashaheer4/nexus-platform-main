@@ -8,7 +8,8 @@ function getCookie(name) {
   return match ? decodeURIComponent(match.split('=')[1]) : null;
 }
 
-const SOCKET_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}`.replace('/api', '');
+const rawSocketUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}`.replace('/api', '');
+const SOCKET_URL = rawSocketUrl.endsWith('/') ? rawSocketUrl.slice(0, -1) : rawSocketUrl;
 
 export default function VideoCall() {
   const { roomId } = useParams();

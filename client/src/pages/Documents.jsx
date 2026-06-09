@@ -180,7 +180,9 @@ export default function Documents() {
   const getFileUrl = (url) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    return `${(process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace('/api', '')}${url}`;
+    const rawBase = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace('/api', '');
+    const cleanBase = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+    return `${cleanBase}${url}`;
   };
 
   // ─── Render ─────────────────────────────────────────────────────────────────

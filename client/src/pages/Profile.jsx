@@ -88,9 +88,13 @@ export default function Profile() {
       {/* Profile Picture */}
       <div className="flex items-center gap-4 mb-6">
         <div className="w-20 h-20 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center">
-          {profile.profilePicture ? (
-            <img src={`${process.env.REACT_APP_API_URL?.replace('/api', '')}${profile.profilePicture}`} alt="Profile" className="w-full h-full object-cover" />
-          ) : (
+          {profile.profilePicture ? (() => {
+            const rawBase = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api').replace('/api', '');
+            const cleanBase = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+            return (
+              <img src={`${cleanBase}${profile.profilePicture}`} alt="Profile" className="w-full h-full object-cover" />
+            );
+          })() : (
             <span className="text-3xl text-gray-400">👤</span>
           )}
         </div>

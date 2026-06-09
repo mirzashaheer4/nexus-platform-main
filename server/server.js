@@ -24,6 +24,13 @@ const swaggerUi     = require('swagger-ui-express');
 
 dotenv.config();
 
+// Normalize CLIENT_URL to prevent trailing slash matching issues (CORS and redirects)
+if (process.env.CLIENT_URL) {
+  process.env.CLIENT_URL = process.env.CLIENT_URL.endsWith('/')
+    ? process.env.CLIENT_URL.slice(0, -1)
+    : process.env.CLIENT_URL;
+}
+
 // Initialize nodemailer mailer (Fix 3)
 const { initializeMailer } = require('./utils/email');
 initializeMailer().catch(err => {
