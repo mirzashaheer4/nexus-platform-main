@@ -15,7 +15,6 @@ export default function VideoCall() {
   const navigate = useNavigate();
 
   const [remoteStream, setRemoteStream] = useState(null);
-  const [localStream, setLocalStream] = useState(null);
   const [micEnabled, setMicEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,7 +36,6 @@ export default function VideoCall() {
         if (!active) { stream.getTracks().forEach(t => t.stop()); return; }
 
         streamRef.current = stream;
-        setLocalStream(stream);
         if (localVideoRef.current) localVideoRef.current.srcObject = stream;
 
         // 2. Read non-httpOnly socket token from cookie, pass in handshake auth

@@ -54,7 +54,12 @@ function DepositModal({ isOpen, onClose, onRefresh }) {
       if (result.error) {
         setError(result.error.message || 'Payment failed.');
       } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-        alert('Payment confirmed! Balance will update momentarily.');
+        try {
+          await API.post(`/payments/confirm/${result.paymentIntent.id}`);
+        } catch (confirmErr) {
+          console.error('Failed to reconcile payment status:', confirmErr);
+        }
+        alert('Payment confirmed! Your balance has been updated.');
         setAmount('');
         onRefresh();
         onClose();

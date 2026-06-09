@@ -106,16 +106,44 @@ router.post(
  *         description: Transaction not found
  */
 router.post('/confirm/:intentId', verifyToken, async (req, res) => {
-  const transaction = await Transaction.findOne({
-    stripePaymentIntentId: req.params.intentId,
-    userId: req.user.id
-  });
+  try {
+    const transaction = await Transaction.findOne({
+      stripePaymentIntentId: req.params.intentId,
+      userId: req.user.id
+    });
 
-  if (!transaction) {
-    return res.status(404).json({ message: 'Transaction not found.' });
+    if (!transaction) {
+      return res.status(404).json({ message: 'Transaction not found.' });
+    }
+
+    // Reconcile status directly from Stripe API if still pending (permanent local & prod fallback)
+    if (transaction.status === 'pending') {
+      try {
+        const paymentIntent = await stripe.paymentIntents.retrieve(req.params.intentId);
+        if (paymentIntent.status === 'succeeded') {
+          transaction.status = 'completed';
+          await transaction.save();
+
+          // Update wallet balance
+          let wallet = await Wallet.findOne({ userId: transaction.userId });
+          if (!wallet) {
+            wallet = new Wallet({ userId: transaction.userId, balance: 0 });
+          }
+          wallet.balance += transaction.amount;
+          await wallet.save();
+        } else if (paymentIntent.status === 'canceled' || paymentIntent.status === 'requires_payment_method') {
+          transaction.status = 'failed';
+          await transaction.save();
+        }
+      } catch (stripeErr) {
+        console.error('[Stripe Reconcile Error]:', stripeErr.message);
+      }
+    }
+
+    res.json({ status: transaction.status, transaction });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-
-  res.json({ status: transaction.status, transaction });
 });
 
 /**

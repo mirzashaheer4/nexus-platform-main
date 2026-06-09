@@ -1,6 +1,9 @@
 // ─── IMPORTANT: express-async-errors MUST be the very first import ───────────
 require('express-async-errors');
 
+// Suppress AWS SDK JS v2 maintenance warning
+process.env.AWS_SDK_JS_SUPPRESS_MAINTENANCE_WARNING_MESSAGE = '1';
+
 const express      = require('express');
 const http         = require('http');
 const mongoose     = require('mongoose');
