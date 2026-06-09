@@ -1,0 +1,11 @@
+{
+  "name": "nexus-platform-root",
+  "version": "1.0.0",
+  "description": "Root configuration for Nexus Platform to run client and server concurrently",
+  "private": true,
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "npx concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  }
+}
