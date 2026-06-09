@@ -55,9 +55,11 @@ function DepositModal({ isOpen, onClose, onRefresh }) {
         setError(result.error.message || 'Payment failed.');
       } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
         try {
-          await API.post(`/payments/confirm/${result.paymentIntent.id}`);
+          await API.post('/payments/deposit', {
+            stripePaymentIntentId: result.paymentIntent.id
+          });
         } catch (confirmErr) {
-          console.error('Failed to reconcile payment status:', confirmErr);
+          console.error('Failed to credit wallet:', confirmErr);
         }
         alert('Payment confirmed! Your balance has been updated.');
         setAmount('');

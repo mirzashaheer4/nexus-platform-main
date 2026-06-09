@@ -16,7 +16,7 @@ const validate = (validations) => {
     if (errors.isEmpty()) {
       return next();
     }
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   };
 };
 
@@ -105,6 +105,83 @@ router.post(
  *       404:
  *         description: Transaction not found
  */
+/**
+ * @swagger
+ * /api/payments/deposit:
+ *   post:
+ *     summary: Confirm a successful Stripe payment and credit the wallet
+ *     tags: [Payments]
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - stripePaymentIntentId
+ *             properties:
+ *               stripePaymentIntentId:
+ *                 type: string
+ *                 description: The Stripe PaymentIntent ID to validate and credit
+ *     responses:
+ *       200:
+ *         description: Wallet credited successfully
+ *       400:
+ *         description: Payment not completed or already credited
+ *       404:
+ *         description: Transaction not found
+ */
+router.post(
+  '/deposit',
+  verifyToken,
+  validate([
+    body('stripePaymentIntentId').notEmpty().withMessage('stripePaymentIntentId is required.')
+  ]),
+  async (req, res) => {
+    const { stripePaymentIntentId } = req.body;
+
+    try {
+      const transaction = await Transaction.findOne({
+        stripePaymentIntentId,
+        userId: req.user.id
+      });
+
+      if (!transaction) {
+        return res.status(404).json({ message: 'Transaction not found.' });
+      }
+
+      if (transaction.status === 'completed') {
+        return res.status(400).json({ message: 'This deposit has already been credited.' });
+      }
+
+      // Validate against Stripe
+      const paymentIntent = await stripe.paymentIntents.retrieve(stripePaymentIntentId);
+      if (paymentIntent.status !== 'succeeded') {
+        transaction.status = 'failed';
+        await transaction.save();
+        return res.status(400).json({ message: `Payment not completed. Stripe status: ${paymentIntent.status}` });
+      }
+
+      // Credit wallet
+      let wallet = await Wallet.findOne({ userId: req.user.id });
+      if (!wallet) {
+        wallet = new Wallet({ userId: req.user.id, balance: 0 });
+      }
+      wallet.balance += transaction.amount;
+      await wallet.save();
+
+      transaction.status = 'completed';
+      await transaction.save();
+
+      res.json({ message: 'Deposit successful', balance: wallet.balance });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
+);
+
 router.post('/confirm/:intentId', verifyToken, async (req, res) => {
   try {
     const transaction = await Transaction.findOne({
@@ -145,6 +222,7 @@ router.post('/confirm/:intentId', verifyToken, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 /**
  * @swagger
