@@ -190,7 +190,11 @@ This triggers the root command `npx concurrently` to fire up:
 
 ## 📡 API Routes & Reference
 
-The API endpoints are documented interactively with Swagger at `http://localhost:5000/api/docs`. Below is a quick overview of primary service groupings:
+> [!IMPORTANT]
+> The authoritative, comprehensive reference for all REST endpoints, parameters, WebSocket events, and error statuses can be found in the **[Nexus Platform API Reference Guide](file:///c:/Users/Shahe/OneDrive/Documents/Projects/In_Progress/nexus-platform-main/docs/API_DOCUMENTATION.md)**.
+> A pre-configured Postman collection is also available at [docs/nexus.postman_collection.json](file:///c:/Users/Shahe/OneDrive/Documents/Projects/In_Progress/nexus-platform-main/docs/nexus.postman_collection.json).
+
+The API endpoints are also documented interactively via Swagger at `http://localhost:5000/api/docs` when running locally. Below is a quick overview of primary service groupings:
 
 ### 🔐 Authentication Module (`/api/auth`)
 | HTTP Method | Route | Auth Required? | Description |
