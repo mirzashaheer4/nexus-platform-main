@@ -30,25 +30,25 @@ const cookieOptions = {
   accessToken: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 15 * 60 * 1000, // 15 minutes
   },
   refreshToken: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   },
   jwtPayload: {
     httpOnly: false, // Must be readable by frontend JS to decode role
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 15 * 60 * 1000,
   },
   socketToken: {
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 15 * 60 * 1000,
   },
 };
