@@ -17,7 +17,11 @@ const validate = (validations) => {
     if (errors.isEmpty()) {
       return next();
     }
-    return res.status(400).json({ errors: errors.array() });
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Validation errors:', errors.array());
+    }
+    const errorMsg = errors.array().map(e => `${e.path || e.param}: ${e.msg}`).join(', ');
+    return res.status(400).json({ message: errorMsg, errors: errors.array() });
   };
 };
 
