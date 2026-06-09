@@ -70,8 +70,10 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Navbar />
-        <AppRoutes />
+        <div className="min-h-screen bg-gray-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-200">
+          <Navbar />
+          <AppRoutes />
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

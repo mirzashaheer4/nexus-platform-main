@@ -72,22 +72,22 @@ function DepositModal({ isOpen, onClose, onRefresh }) {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-white shadow-2xl">
+      <div className="bg-white border border-gray-200 dark:bg-slate-900 dark:border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-gray-900 dark:text-white shadow-2xl transition-colors">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition text-lg"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-white transition text-lg"
         >
           &times;
         </button>
-        <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+        <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
           Add Funds via Stripe
         </h3>
-        {error && <p className="mb-3 text-red-400 text-sm bg-red-950/40 p-2 rounded border border-red-900/50">{error}</p>}
+        {error && <p className="mb-3 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-950/40 p-2 rounded border border-red-200 dark:border-red-900/50">{error}</p>}
         <form onSubmit={handleDeposit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Amount (USD)</label>
+            <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Amount (USD)</label>
             <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-400 font-medium">$</span>
+              <span className="absolute left-3 top-2.5 text-gray-500 dark:text-gray-400 font-medium">$</span>
               <input
                 id="deposit-amount"
                 type="number"
@@ -95,22 +95,22 @@ function DepositModal({ isOpen, onClose, onRefresh }) {
                 placeholder="0.00"
                 value={amount}
                 onChange={e => setAmount(e.target.value)}
-                className="w-full pl-8 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
+                className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 dark:bg-slate-955 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
                 required
               />
             </div>
             <span className="text-xs text-gray-500 mt-1 block">Minimum $0.50</span>
           </div>
 
-          <div className="bg-slate-950 p-4 border border-slate-800 rounded-lg">
-            <label className="block text-sm text-gray-400 mb-2">Card Details</label>
-            <div className="p-2 bg-slate-950 rounded border border-slate-800">
+          <div className="bg-gray-50 dark:bg-slate-950 p-4 border border-gray-200 dark:border-slate-800 rounded-lg transition-colors">
+            <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">Card Details</label>
+            <div className="p-2 bg-white dark:bg-slate-950 rounded border border-gray-200 dark:border-slate-800">
               <CardElement
                 options={{
                   style: {
                     base: {
                       fontSize: '16px',
-                      color: '#ffffff',
+                      color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#0f172a',
                       '::placeholder': {
                         color: '#64748b',
                       },
@@ -229,27 +229,27 @@ export default function Payment() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-slate-950 text-white">
+      <div className="flex justify-center items-center min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-955 dark:text-white">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-6 font-sans">
+    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white p-6 font-sans transition-colors">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Secure Payments Wallet
           </h2>
-          <p className="text-gray-400 text-sm mt-1">Manage deposits, withdrawals, and direct peer-to-peer transfers.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Manage deposits, withdrawals, and direct peer-to-peer transfers.</p>
         </div>
 
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card Display */}
-          <div className="md:col-span-1 bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl flex flex-col justify-between aspect-[1.6/1] relative overflow-hidden group">
+          <div className="md:col-span-1 bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl flex flex-col justify-between aspect-[1.6/1] relative overflow-hidden group text-white">
             {/* Decors */}
             <div className="absolute -right-10 -top-10 w-36 h-36 bg-white/10 rounded-full blur-2xl group-hover:scale-110 transition duration-500"></div>
             <div className="flex justify-between items-start">
@@ -271,28 +271,28 @@ export default function Payment() {
           </div>
 
           {/* Quick Actions Card */}
-          <div className="md:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-center space-y-4">
-            <h4 className="text-lg font-bold text-gray-300">Quick Transactions</h4>
-            <p className="text-sm text-gray-400">Add funds using Stripe Sandbox, withdraw directly to your account, or transfer instantly to another registered user using their email address.</p>
+          <div className="md:col-span-2 bg-white border border-gray-200 dark:bg-slate-900 dark:border-slate-800 p-6 rounded-2xl flex flex-col justify-center space-y-4 transition-colors">
+            <h4 className="text-lg font-bold text-gray-800 dark:text-gray-300">Quick Transactions</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Add funds using Stripe Sandbox, withdraw directly to your account, or transfer instantly to another registered user using their email address.</p>
             <div className="flex flex-wrap gap-4 pt-2">
               <button
                 id="open-deposit-btn"
                 onClick={() => { setActionError(''); setIsDepositOpen(true); }}
-                className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold rounded-xl shadow-lg hover:shadow-emerald-500/10 transition flex-1 text-center"
+                className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-white rounded-xl shadow-lg hover:shadow-emerald-500/10 transition flex-1 text-center"
               >
                 Deposit Funds
               </button>
               <button
                 id="open-withdraw-btn"
                 onClick={() => { setActionError(''); setIsWithdrawOpen(true); }}
-                className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 font-bold rounded-xl transition border border-slate-700 flex-1 text-center"
+                className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white font-bold rounded-xl transition border border-gray-200 dark:border-slate-700 flex-1 text-center"
               >
                 Withdraw Funds
               </button>
               <button
                 id="open-transfer-btn"
                 onClick={() => { setActionError(''); setIsTransferOpen(true); }}
-                className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 font-bold rounded-xl transition border border-slate-700 flex-1 text-center"
+                className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white font-bold rounded-xl transition border border-gray-200 dark:border-slate-700 flex-1 text-center"
               >
                 Peer Transfer
               </button>
@@ -301,16 +301,16 @@ export default function Payment() {
         </div>
 
         {/* History Table */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg">
-          <div className="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
-            <h4 className="font-bold text-lg text-gray-200">Transaction History</h4>
-            <span className="text-xs text-gray-500">Showing recent actions</span>
+        <div className="bg-white border border-gray-200 dark:bg-slate-900 dark:border-slate-800 rounded-2xl overflow-hidden shadow-lg transition-colors">
+          <div className="p-5 border-b border-gray-200 dark:border-slate-800 flex justify-between items-center bg-gray-50/50 dark:bg-slate-900/50 transition-colors">
+            <h4 className="font-bold text-lg text-gray-800 dark:text-gray-200">Transaction History</h4>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Showing recent actions</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 text-xs font-semibold uppercase tracking-wider bg-slate-950/40">
+                <tr className="border-b border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider bg-gray-50 dark:bg-slate-950/40 transition-colors">
                   <th className="p-4">Date</th>
                   <th className="p-4">Type</th>
                   <th className="p-4">Description</th>
@@ -318,39 +318,39 @@ export default function Payment() {
                   <th className="p-4">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 text-sm text-gray-300">
+              <tbody className="divide-y divide-gray-200 dark:divide-slate-800/60 text-sm text-gray-700 dark:text-gray-300 transition-colors">
                 {history.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className="p-8 text-center text-gray-500">
+                    <td colSpan="5" className="p-8 text-center text-gray-400 dark:text-gray-500">
                       No transactions logged. Complete a deposit, withdrawal, or transfer to get started.
                     </td>
                   </tr>
                 ) : (
                   history.map((tx) => (
-                    <tr key={tx._id} className="hover:bg-slate-950/20 transition">
-                      <td className="p-4 font-mono text-xs text-gray-400">
+                    <tr key={tx._id} className="hover:bg-gray-55 dark:hover:bg-slate-950/20 transition">
+                      <td className="p-4 font-mono text-xs text-gray-500 dark:text-gray-400">
                         {new Date(tx.createdAt).toLocaleDateString()} {new Date(tx.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </td>
                       <td className="p-4 uppercase font-bold text-xs">
                         <span className={`px-2 py-0.5 rounded ${
-                          tx.type === 'deposit' ? 'text-emerald-400 bg-emerald-950/30' :
-                          tx.type === 'withdrawal' ? 'text-rose-400 bg-rose-950/30' :
-                          'text-indigo-400 bg-indigo-950/30'
+                          tx.type === 'deposit' ? 'text-emerald-500 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-950/30' :
+                          tx.type === 'withdrawal' ? 'text-rose-500 bg-rose-50 dark:text-rose-400 dark:bg-rose-950/30' :
+                          'text-indigo-500 bg-indigo-50 dark:text-indigo-400 dark:bg-indigo-950/30'
                         }`}>
                           {tx.type}
                         </span>
                       </td>
-                      <td className="p-4 text-gray-300">{tx.description}</td>
+                      <td className="p-4 text-gray-700 dark:text-gray-300">{tx.description}</td>
                       <td className="p-4 font-semibold font-mono">
-                        <span className={tx.type === 'deposit' ? 'text-emerald-400' : 'text-rose-400'}>
+                        <span className={tx.type === 'deposit' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}>
                           {tx.type === 'deposit' ? '+' : '-'} {formatCurrency(tx.amount)}
                         </span>
                       </td>
                       <td className="p-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
-                          tx.status === 'completed' ? 'bg-emerald-900/30 text-emerald-400 border border-emerald-900/50' :
-                          tx.status === 'failed' ? 'bg-rose-900/30 text-rose-400 border border-rose-900/50' :
-                          'bg-yellow-900/30 text-yellow-400 border border-yellow-900/50'
+                          tx.status === 'completed' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50' :
+                          tx.status === 'failed' ? 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50' :
+                          'bg-yellow-50 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-900/50'
                         }`}>
                           {tx.status}
                         </span>
@@ -376,22 +376,22 @@ export default function Payment() {
       {/* Direct Withdraw Modal */}
       {isWithdrawOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-white shadow-2xl">
+          <div className="bg-white border border-gray-200 dark:bg-slate-900 dark:border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-gray-900 dark:text-white shadow-2xl transition-colors">
             <button
               onClick={() => setIsWithdrawOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition text-lg"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-white transition text-lg"
             >
               &times;
             </button>
-            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
               Withdraw Funds
             </h3>
-            {actionError && <p className="mb-3 text-red-400 text-sm bg-red-950/40 p-2 rounded border border-red-900/50">{actionError}</p>}
+            {actionError && <p className="mb-3 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-950/40 p-2 rounded border border-red-200 dark:border-red-900/50">{actionError}</p>}
             <form onSubmit={handleWithdraw} className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Amount to Withdraw (USD)</label>
+                <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Amount to Withdraw (USD)</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-gray-400 font-medium">$</span>
+                  <span className="absolute left-3 top-2.5 text-gray-500 dark:text-gray-400 font-medium">$</span>
                   <input
                     id="withdraw-amount"
                     type="number"
@@ -399,7 +399,7 @@ export default function Payment() {
                     placeholder="0.00"
                     value={withdrawAmount}
                     onChange={e => setWithdrawAmount(e.target.value)}
-                    className="w-full pl-8 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
                     required
                   />
                 </div>
@@ -421,35 +421,35 @@ export default function Payment() {
       {/* Peer Transfer Modal */}
       {isTransferOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-white shadow-2xl">
+          <div className="bg-white border border-gray-200 dark:bg-slate-900 dark:border-slate-800 rounded-2xl w-full max-w-md p-6 relative text-gray-900 dark:text-white shadow-2xl transition-colors">
             <button
               onClick={() => setIsTransferOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition text-lg"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-white transition text-lg"
             >
               &times;
             </button>
-            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
               Transfer to Partner
             </h3>
-            {actionError && <p className="mb-3 text-red-400 text-sm bg-red-950/40 p-2 rounded border border-red-900/50">{actionError}</p>}
+            {actionError && <p className="mb-3 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-950/40 p-2 rounded border border-red-200 dark:border-red-900/50">{actionError}</p>}
             <form onSubmit={handleTransfer} className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Recipient Email Address</label>
+                <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Recipient Email Address</label>
                 <input
                   id="transfer-email"
                   type="email"
                   placeholder="partner@example.com"
                   value={recipientEmail}
                   onChange={e => setRecipientEmail(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
+                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Amount to Send (USD)</label>
+                <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Amount to Send (USD)</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-gray-400 font-medium">$</span>
+                  <span className="absolute left-3 top-2.5 text-gray-500 dark:text-gray-400 font-medium">$</span>
                   <input
                     id="transfer-amount"
                     type="number"
@@ -457,7 +457,7 @@ export default function Payment() {
                     placeholder="0.00"
                     value={transferAmount}
                     onChange={e => setTransferAmount(e.target.value)}
-                    className="w-full pl-8 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
+                    className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
                     required
                   />
                 </div>

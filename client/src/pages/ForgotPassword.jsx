@@ -26,36 +26,36 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-16 p-8 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl text-white">
-      <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+    <div className="max-w-md mx-auto mt-16 p-8 bg-white border border-gray-200 rounded-2xl shadow-xl text-gray-900 dark:bg-slate-900 dark:border-slate-800 dark:text-white">
+      <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
         Forgot Password
       </h2>
-      <p className="text-gray-400 text-sm mb-6">
+      <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
         Enter your email address and we'll send you a link to reset your password.
       </p>
 
       {error && (
-        <div className="mb-4 text-red-400 text-sm bg-red-950/40 p-3 rounded-lg border border-red-900/50">
+        <div className="mb-4 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-950/40 p-3 rounded-lg border border-red-200 dark:border-red-900/50">
           {error}
         </div>
       )}
 
       {message && (
-        <div className="mb-4 text-emerald-400 text-sm bg-emerald-950/40 p-3 rounded-lg border border-emerald-900/50">
+        <div className="mb-4 text-emerald-600 dark:text-emerald-400 text-sm bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-lg border border-emerald-200 dark:border-emerald-900/50">
           {message}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm text-gray-400 mb-2">Email Address</label>
+          <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">Email Address</label>
           <input
             id="forgot-email"
             type="email"
             placeholder="name@example.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+            className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition dark:bg-slate-950 dark:border-slate-800 dark:text-white"
             required
           />
         </div>

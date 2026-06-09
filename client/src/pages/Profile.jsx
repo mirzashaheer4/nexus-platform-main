@@ -65,9 +65,9 @@ export default function Profile() {
   const isInvestor = profile.role === 'investor';
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white text-gray-900 border rounded shadow-sm">
+    <div className="p-6 max-w-3xl mx-auto bg-white border border-gray-200 rounded shadow-sm text-gray-900 dark:bg-slate-900 dark:border-slate-800 dark:text-white transition-colors">
       <h1 className="text-2xl font-bold mb-6">My Profile</h1>
-      {error && <p className="mb-4 text-red-600 text-sm">{error}</p>}
+      {error && <p className="mb-4 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-950/40 p-2 rounded border border-red-200 dark:border-red-900/50">{error}</p>}
 
       {/* Profile Picture */}
       <div className="flex items-center gap-4 mb-6">
@@ -95,22 +95,22 @@ export default function Profile() {
       {editing ? (
         <form onSubmit={handleSave} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bio</label>
             <textarea
               value={form.bio || ''}
               onChange={e => handleChange('bio', e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white"
               rows={3}
               placeholder="Tell us about yourself..."
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-            <input type="text" value={form.location || ''} onChange={e => handleChange('location', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="City, Country" />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
+            <input type="text" value={form.location || ''} onChange={e => handleChange('location', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="City, Country" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
-            <input type="url" value={form.website || ''} onChange={e => handleChange('website', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="https://..." />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Website</label>
+            <input type="url" value={form.website || ''} onChange={e => handleChange('website', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="https://..." />
           </div>
 
           {/* Investor-specific fields */}
@@ -118,17 +118,17 @@ export default function Profile() {
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Min Investment ($)</label>
-                  <input type="number" value={form.investmentRange?.min || ''} onChange={e => handleChange('investmentRange', { ...form.investmentRange, min: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Min Investment ($)</label>
+                  <input type="number" value={form.investmentRange?.min || ''} onChange={e => handleChange('investmentRange', { ...form.investmentRange, min: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Max Investment ($)</label>
-                  <input type="number" value={form.investmentRange?.max || ''} onChange={e => handleChange('investmentRange', { ...form.investmentRange, max: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Max Investment ($)</label>
+                  <input type="number" value={form.investmentRange?.max || ''} onChange={e => handleChange('investmentRange', { ...form.investmentRange, max: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Industries of Interest (comma-separated)</label>
-                <input type="text" value={(form.industriesOfInterest || []).join(', ')} onChange={e => handleChange('industriesOfInterest', e.target.value.split(',').map(s => s.trim()).filter(Boolean))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="FinTech, HealthTech, EdTech" />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Industries of Interest (comma-separated)</label>
+                <input type="text" value={(form.industriesOfInterest || []).join(', ')} onChange={e => handleChange('industriesOfInterest', e.target.value.split(',').map(s => s.trim()).filter(Boolean))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="FinTech, HealthTech, EdTech" />
               </div>
             </>
           )}
@@ -137,12 +137,12 @@ export default function Profile() {
           {!isInvestor && (
             <>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Startup Name</label>
-                <input type="text" value={form.startupName || ''} onChange={e => handleChange('startupName', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startup Name</label>
+                <input type="text" value={form.startupName || ''} onChange={e => handleChange('startupName', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Startup Stage</label>
-                <select value={form.startupStage || ''} onChange={e => handleChange('startupStage', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startup Stage</label>
+                <select value={form.startupStage || ''} onChange={e => handleChange('startupStage', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white">
                   <option value="">Select stage</option>
                   <option value="idea">Idea</option>
                   <option value="mvp">MVP</option>
@@ -152,16 +152,16 @@ export default function Profile() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Funding Required ($)</label>
-                <input type="number" value={form.fundingRequired || ''} onChange={e => handleChange('fundingRequired', Number(e.target.value))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Funding Required ($)</label>
+                <input type="number" value={form.fundingRequired || ''} onChange={e => handleChange('fundingRequired', Number(e.target.value))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Pitch Deck URL</label>
-                <input type="url" value={form.pitchDeckUrl || ''} onChange={e => handleChange('pitchDeckUrl', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="https://..." />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Pitch Deck URL</label>
+                <input type="url" value={form.pitchDeckUrl || ''} onChange={e => handleChange('pitchDeckUrl', e.target.value)} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="https://..." />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Team Size</label>
-                <input type="number" value={form.teamSize || ''} onChange={e => handleChange('teamSize', Number(e.target.value))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Team Size</label>
+                <input type="number" value={form.teamSize || ''} onChange={e => handleChange('teamSize', Number(e.target.value))} className="w-full p-2 border border-gray-300 rounded bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-950 dark:border-slate-800 dark:text-white" />
               </div>
             </>
           )}
@@ -170,7 +170,7 @@ export default function Profile() {
             <button id="save-profile-btn" type="submit" disabled={saving} className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition disabled:opacity-50">
               {saving ? 'Saving...' : 'Save Changes'}
             </button>
-            <button type="button" onClick={() => { setEditing(false); setForm(profile); }} className="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300 transition">
+            <button type="button" onClick={() => { setEditing(false); setForm(profile); }} className="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300 transition dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700">
               Cancel
             </button>
           </div>

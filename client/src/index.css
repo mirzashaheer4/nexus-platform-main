@@ -1,3 +1,117 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Global Dark Theme Overrides */
+html.dark, html.dark body {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+html.dark .bg-white {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+html.dark .bg-slate-50, html.dark .bg-gray-50 {
+  background-color: #020617 !important;
+}
+
+html.dark .border,
+html.dark .border-slate-200,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #1e293b !important;
+}
+
+/* Text and Label Overrides */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark p,
+html.dark span,
+html.dark strong,
+html.dark label {
+  color: #f8fafc;
+}
+
+html.dark .text-slate-900,
+html.dark .text-gray-900 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-gray-800,
+html.dark .text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-slate-600,
+html.dark .text-gray-600,
+html.dark .text-slate-500,
+html.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+/* Links */
+html.dark a.text-indigo-600,
+html.dark .text-indigo-600 {
+  color: #818cf8 !important;
+}
+
+/* Inputs, Textareas, Selects */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #090d16 !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #475569 !important;
+}
+
+/* Secondary/Outline Buttons */
+html.dark .bg-gray-200,
+html.dark .bg-white text-indigo-600 {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .bg-gray-200:hover {
+  background-color: #334155 !important;
+}
+
+/* react-calendar overrides */
+html.dark .react-calendar {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .react-calendar__tile:enabled:hover,
+html.dark .react-calendar__tile:enabled:focus {
+  background-color: #1e293b !important;
+}
+
+html.dark .react-calendar__tile--now {
+  background-color: #334155 !important;
+}
+
+html.dark .react-calendar__tile--active {
+  background-color: #4f46e5 !important;
+  color: white !important;
+}
+
+html.dark .react-calendar__month-view__days__day--neighboringMonth {
+  color: #475569 !important;
+}
+
+html.dark .react-calendar__navigation button:enabled:hover,
+html.dark .react-calendar__navigation button:enabled:focus {
+  background-color: #1e293b !important;
+}
