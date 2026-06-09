@@ -218,6 +218,7 @@ export default function Profile() {
           <button id="edit-profile-btn" onClick={() => setEditing(true)} className="mt-4 bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
             Edit Profile
           </button>
+        </div>
       )}
 
       {/* 2FA Security Section */}
